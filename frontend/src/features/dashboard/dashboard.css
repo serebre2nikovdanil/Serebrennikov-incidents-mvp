@@ -1,0 +1,138 @@
+/* Дизайн-токены дашборда. Импортируется один раз в DashboardPage.tsx.
+   Скопировать в frontend/src/features/dashboard/dashboard.css */
+
+.dash {
+  /* Light theme — warm neutral */
+  --d-bg: oklch(0.985 0.004 80);
+  --d-bg-elev: #ffffff;
+  --d-bg-muted: oklch(0.965 0.005 80);
+  --d-border: oklch(0.92 0.005 80);
+  --d-border-strong: oklch(0.86 0.006 80);
+  --d-text: oklch(0.22 0.012 60);
+  --d-text-muted: oklch(0.5 0.012 60);
+  --d-text-subtle: oklch(0.65 0.01 60);
+
+  --d-accent: oklch(0.52 0.16 268);
+  --d-accent-soft: oklch(0.95 0.03 268);
+  --d-accent-strong: oklch(0.42 0.18 268);
+
+  --d-critical: oklch(0.62 0.18 25);
+  --d-critical-soft: oklch(0.95 0.04 25);
+  --d-significant: oklch(0.73 0.13 75);
+  --d-significant-soft: oklch(0.96 0.05 80);
+  --d-minor: oklch(0.66 0.08 200);
+  --d-minor-soft: oklch(0.95 0.025 200);
+  --d-good: oklch(0.62 0.13 155);
+  --d-good-soft: oklch(0.95 0.04 155);
+
+  --d-c1: oklch(0.55 0.15 268);
+  --d-c2: oklch(0.65 0.13 200);
+  --d-c3: oklch(0.7 0.13 145);
+  --d-c4: oklch(0.72 0.13 75);
+  --d-c5: oklch(0.65 0.16 25);
+  --d-c6: oklch(0.55 0.1 320);
+
+  --d-radius: 14px;
+  --d-radius-sm: 6px;
+  --d-shadow-sm: 0 1px 0 oklch(0.85 0.01 80 / 0.4);
+
+  color: var(--d-text);
+  font-family: "Manrope", -apple-system, "Segoe UI", system-ui, sans-serif;
+  font-size: 14px;
+}
+
+.dash * { box-sizing: border-box; }
+
+.dash .d-card {
+  background: var(--d-bg-elev);
+  border: 1px solid var(--d-border);
+  border-radius: var(--d-radius);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.dash .d-card-h { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.dash .d-card-title { font-size: 13px; font-weight: 600; margin: 0; }
+.dash .d-card-sub { font-size: 11px; color: var(--d-text-subtle); }
+
+/* KPI */
+.dash .kpi {
+  background: var(--d-bg-elev);
+  border: 1px solid var(--d-border);
+  border-radius: var(--d-radius);
+  padding: 16px 18px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.dash .kpi-label { font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--d-text-subtle); display: flex; align-items: center; gap: 6px; }
+.dash .kpi-label .dot { width: 6px; height: 6px; border-radius: 50%; }
+.dash .kpi-value { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; }
+.dash .kpi-value .unit { font-size: 14px; font-weight: 500; color: var(--d-text-subtle); margin-left: 4px; }
+.dash .kpi-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
+.dash .kpi-delta { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 999px; }
+.dash .kpi-delta.good { color: var(--d-good); background: var(--d-good-soft); }
+.dash .kpi-delta.bad { color: var(--d-critical); background: var(--d-critical-soft); }
+.dash .kpi-delta.flat { color: var(--d-text-muted); background: var(--d-bg-muted); }
+.dash .kpi-foot { font-size: 11px; color: var(--d-text-subtle); display: flex; justify-content: space-between; }
+
+/* Tags */
+.dash .d-tag { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; line-height: 1.6; }
+.dash .d-tag.crit { background: var(--d-critical-soft); color: var(--d-critical); }
+.dash .d-tag.sig { background: var(--d-significant-soft); color: oklch(0.5 0.13 75); }
+.dash .d-tag.min { background: var(--d-minor-soft); color: oklch(0.45 0.08 200); }
+.dash .d-tag.good { background: var(--d-good-soft); color: var(--d-good); }
+.dash .d-tag.muted { background: var(--d-bg-muted); color: var(--d-text-muted); }
+
+/* Funnel */
+.dash .funnel-row {
+  display: grid;
+  grid-template-columns: 220px 1fr 90px 90px;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--d-border);
+}
+.dash .funnel-row:last-child { border-bottom: 0; }
+.dash .funnel-stage-name { font-weight: 600; font-size: 13px; }
+.dash .funnel-stage-meta { font-size: 11px; color: var(--d-text-subtle); }
+.dash .funnel-bar { position: relative; height: 28px; border-radius: 6px; background: var(--d-bg-muted); overflow: hidden; }
+.dash .funnel-bar-fill { position: absolute; inset: 0 auto 0 0; background: linear-gradient(90deg, var(--d-accent) 0%, oklch(0.58 0.16 240) 100%); border-radius: 6px; }
+.dash .funnel-count { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; font-size: 14px; }
+.dash .funnel-pct { text-align: right; font-variant-numeric: tabular-nums; font-size: 12px; color: var(--d-text-muted); }
+
+/* Legend */
+.dash .d-legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11px; color: var(--d-text-muted); }
+.dash .d-legend-item { display: inline-flex; align-items: center; gap: 6px; }
+.dash .d-legend-swatch { width: 10px; height: 10px; border-radius: 3px; }
+
+/* Grid */
+.dash .d-grid-5 { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.dash .d-grid-12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
+.dash .d-col-4 { grid-column: span 4; }
+.dash .d-col-5 { grid-column: span 5; }
+.dash .d-col-6 { grid-column: span 6; }
+.dash .d-col-7 { grid-column: span 7; }
+.dash .d-col-8 { grid-column: span 8; }
+.dash .d-col-12 { grid-column: span 12; }
+
+/* Filter bar */
+.dash .filterbar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px;
+  background: var(--d-bg-elev);
+  border: 1px solid var(--d-border);
+  border-radius: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.dash .chip-group { display: flex; background: var(--d-bg-muted); padding: 3px; border-radius: 8px; gap: 2px; }
+.dash .chip { border: 0; background: transparent; padding: 5px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; color: var(--d-text-muted); cursor: pointer; font-family: inherit; }
+.dash .chip[aria-pressed="true"] { background: var(--d-bg-elev); color: var(--d-text); box-shadow: var(--d-shadow-sm); }
+
+.dash svg text { font-family: inherit; }
+
+/* tabs (AntD-friendly outer wrapper; tabs themselves stay AntD) */
+.dash-page-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.dash-page-title { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin: 0; color: var(--d-text); }
+.dash-page-sub { color: var(--d-text-subtle); font-size: 13px; margin-top: 4px; }
